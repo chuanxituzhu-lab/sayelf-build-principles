@@ -18,14 +18,16 @@ Sayelf Build Principles is a pre-development Skill for building **Agents, Skills
 | **04 — Dynamic by State** | Schedule work from state, change rate, and importance instead of fixed brute-force polling. |
 | **05 — Intelligent Automation** | Automate discovery through recommendation while keeping `Observation`, `Inference`, `Hypothesis`, and `Fact` distinct. |
 | **06 — Evidence-driven Evolution** | Upgrade through `Observe → Challenge → Validate → Canary → Promote`, with versioning, traceability, and rollback. |
-| **07 — WebUI as Human Interface** | Make the WebUI the human execution interface, not a decoration layer; expose complexity progressively. |
+| **07 — WebUI as Human Interface** | Build a WebUI only when the real function needs a human-facing visual interface; otherwise do not add one. When present, expose complexity progressively. |
 | **Simple-first** | Choose the least complex reliable option that satisfies the real task. |
 
-The default user path is always:
+When a WebUI is justified, the default user path is:
 
 **Open → Input → Execute → Result**
 
 The system may be sophisticated behind the interface. A normal user should not need to understand the architecture, plugins, models, parameters, or logs to complete the core task.
+
+The default path applies when a WebUI is justified. A Skill, Agent, Tool, or System that does not need visual interaction should not create a WebUI; use its simplest suitable interface instead.
 
 ## Portable by design
 
@@ -105,7 +107,9 @@ Every promotion should be **versioned, traceable, and rollbackable**. If it cann
 
 ### 07 — WebUI as Human Interface
 
-The WebUI is the system's human execution interface. The visible workflow should follow:
+First decide whether the real function needs a human-facing visual interface. Build a WebUI only when it materially improves task completion, visibility, control, or evidence for the target users. If it is not needed, do not build one.
+
+When a WebUI is justified, it is the system's human execution interface. The visible workflow should follow:
 
 **Input → Processing → Evidence → State → Decision → Action → Outcome**
 

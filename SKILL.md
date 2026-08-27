@@ -18,6 +18,8 @@ Activate when the request involves any of the following:
 
 For a small, local change with no new capability or design decision, apply the relevant principles proportionally and do not manufacture a large decision record.
 
+Do not create a WebUI by default. First determine whether the real function needs a human-facing visual interface. If it does not, do not build one; use the host's native interaction, CLI, API, background workflow, or other simplest suitable interface.
+
 ## Portability contract
 
 - Treat this file as the canonical source of truth. Do not duplicate or fork its principles into host-specific versions.
@@ -58,7 +60,7 @@ Keep only the **Object + Function + Interaction** required for the real task and
 - **Functional Entropy:** remove features that do not move a real task toward a result.
 - **Interaction Entropy:** remove user-facing complexity that does not help the user complete the task.
 
-The default user path is **Open → Input → Execute → Result**. Complex internals may remain behind the interface; ordinary users should not need to understand them.
+When a WebUI is present, the default user path is **Open → Input → Execute → Result**. Without a WebUI, use the simplest suitable interface. Complex internals may remain behind the interface; ordinary users should not need to understand them.
 
 ### 02 — Modular / Pluggable
 
@@ -82,7 +84,9 @@ Capability upgrades follow **Observe → Challenge → Validate → Canary → P
 
 ### 07 — WebUI as Human Interface
 
-Treat WebUI as the human execution interface, not decoration. Make the user-facing chain **Input → Processing → Evidence → State → Decision → Action → Outcome**, while preserving **Open → Input → Execute → Result** as the ordinary path. Progressively disclose evidence, plugins, models, parameters, logs, and developer controls.
+First decide whether the real function needs a human-facing visual interface. Build a WebUI only when it materially improves task completion, visibility, control, or evidence for the target users. If it is not needed, do not build one.
+
+When a WebUI is justified, treat it as the human execution interface, not decoration. Make the user-facing chain **Input → Processing → Evidence → State → Decision → Action → Outcome**, while preserving **Open → Input → Execute → Result** as the ordinary path. Progressively disclose evidence, plugins, models, parameters, logs, and developer controls.
 
 ## Simple-first constraint
 
@@ -102,7 +106,7 @@ Increase complexity only after simpler options are tested or ruled out with evid
 6. **Localize:** decide what runs locally and justify every cloud or model boundary.
 7. **Model state:** define state, change signals, importance, and next-check behavior instead of fixed polling.
 8. **Bound automation:** label observations, inferences, hypotheses, and facts; identify the validation evidence.
-9. **Design the human path:** make WebUI follow Open → Input → Execute → Result; hide advanced controls behind progressive disclosure.
+9. **Choose the interface:** decide whether the real function justifies a WebUI. If yes, make it follow Open → Input → Execute → Result and hide advanced controls behind progressive disclosure; if no, do not add a WebUI and keep the simplest suitable interface.
 10. **Build the minimum slice:** implement only the smallest path that can produce the stated result.
 11. **Verify and evolve:** run focused checks, record evidence, and promote changes only through validation, canary, versioning, and rollback readiness.
 
@@ -122,7 +126,8 @@ Local-first boundary:
 State, change signals, and next-check rule:
 Observation / inference / hypothesis / fact boundary:
 Evolution, validation, canary, version, and rollback plan:
-Default WebUI path: Open → Input → Execute → Result
+WebUI decision: Required | Not required — reason:
+Default WebUI path (if required): Open → Input → Execute → Result
 Simplest reliable implementation:
 Explicitly not building:
 ```

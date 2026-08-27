@@ -7,8 +7,8 @@ Project-level hard gates:
 1. Run **Step 0 — Innovation Gate**: search, compare, distill, identify the gap, and classify the idea as `Duplicate`, `Integrate`, `Improve`, `Differentiate`, or `Innovate`.
 2. `Improve` is the minimum threshold for new self-built functionality. Without a measurable improvement, meaningful differentiator, or validated innovation, reuse or integrate instead.
 3. Complete the **Build Decision Record** in `SKILL.md` before coding. Define the real task, success evidence, minimum Core, boundaries, state behavior, epistemic labels, evolution/rollback, simplest implementation, and what is not being built.
-4. Apply the seven principles: negative entropy across architecture/function/interaction; modular and pluggable boundaries; local-first execution; state-driven work; evidence-bounded automation; evidence-driven evolution; and WebUI as the human interface.
-5. Keep the ordinary user path **Open → Input → Execute → Result**. Put technical complexity behind progressive disclosure.
+4. Apply the seven principles: negative entropy across architecture/function/interaction; modular and pluggable boundaries; local-first execution; state-driven work; evidence-bounded automation; evidence-driven evolution; and WebUI as the human interface when the real function requires it.
+5. Decide whether a WebUI is needed before building one. If needed, keep the ordinary user path **Open → Input → Execute → Result** and put technical complexity behind progressive disclosure; if not needed, do not create one.
 6. Keep changes minimal and verify the stated success measure before declaring completion. Report residual risk and untested behavior.
 
 Do not expand this file with the full Skill. Update `SKILL.md` when the executable development protocol changes; keep this file limited to host-level enforcement.
