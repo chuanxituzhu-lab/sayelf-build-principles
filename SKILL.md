@@ -93,9 +93,11 @@ When a WebUI is justified, treat it as the human execution interface, not decora
 
 Keep local data read from a device or workspace inside the local trust boundary by default. This includes local files, source code, documents, media, logs, databases, project context, and device-derived data. Do not upload or silently transmit it to cloud services, external models, web searches, third-party APIs, telemetry, remote logs, or automatic synchronization.
 
-Treat credentials and secrets (passwords, API keys, tokens, private keys, cookies, and session credentials), personal data, customer data, proprietary material, financial, health, legal, biometric, location, unpublished, and security-sensitive information as sensitive or restricted. Sensitive data stays local by default; credentials and secrets must never be uploaded.
+Treat credentials and secrets (passwords, API keys, tokens, private keys, cookies, and session credentials), personal data, customer data, proprietary material, financial, health, legal, biometric, location, unpublished, and security-sensitive information as sensitive or restricted. Sensitive data stays local; credentials and secrets must never be uploaded.
 
-Allow an external transfer only when it is necessary for the real task and all of these conditions hold: specific user authorization, known destination and retention, minimum necessary data, local redaction or tokenization, an approved secure route, and an auditable transfer plus output leak check. If any condition is unknown, keep the data local and stop to clarify.
+For GitHub and any public network, local, internal, sensitive, restricted, or unknown data must not leave the local trust boundary. This covers commits, pushes, public or private repositories, pull requests, issues, releases, packages, public websites, screenshots, logs, traces, metadata, archives, telemetry, and quoted or pasted content. A request to push or publish is not permission to expose non-public data. Encoding, compression, screenshots, transformation, or indirection must not bypass this rule.
+
+Only content explicitly classified **Public** may leave the local trust boundary for GitHub or public publication. Before transfer, review the staged diff and every release artifact for local, internal, sensitive, restricted, or unknown data. If classification, authorization, destination, retention, or leak-check evidence is missing, block the transfer and keep the data local. Other external transfers are allowed only when necessary, specifically authorized, minimized, locally redacted or tokenized, sent through an approved secure route, and auditable for leakage.
 
 Review prompts, outputs, errors, logs, traces, caches, and telemetry for accidental disclosure. Local-first therefore means both **local computation** and **local data control**.
 
@@ -115,7 +117,7 @@ Increase complexity only after simpler options are tested or ruled out with evid
 4. **Select:** choose the simplest reliable implementation and state what is deliberately not being built.
 5. **Bound:** define the minimum Core and isolate optional or platform-specific capabilities as plugins where needed.
 6. **Localize:** decide what runs locally and justify every cloud or model boundary.
-7. **Protect data:** classify local and sensitive data, define the local trust boundary and any possible egress, and apply the no-upload default. If transfer is necessary, record authorization, minimization, redaction, destination, retention, secure route, and leak checks.
+7. **Protect data:** classify data as `Public`, `Internal`, `Sensitive`, `Restricted`, or `Unknown`. Keep local, internal, sensitive, restricted, and unknown data local. For GitHub or public-network publication, allow only explicitly `Public` content after reviewing the staged diff and every release artifact; otherwise block. Record evidence for any other authorized external transfer.
 8. **Model state:** define state, change signals, importance, and next-check behavior instead of fixed polling.
 9. **Bound automation:** label observations, inferences, hypotheses, and facts; identify the validation evidence.
 10. **Choose the interface:** decide whether the real function justifies a WebUI. If yes, make it follow Open → Input → Execute → Result and hide advanced controls behind progressive disclosure; if no, do not add a WebUI and keep the simplest suitable interface.
@@ -136,7 +138,8 @@ Minimum Core:
 Plugin boundaries (if any):
 Local-first boundary:
 Data classification and local trust boundary:
-External transfer, authorization, minimization, retention, and leak-check plan:
+GitHub/public release decision: Allowed | Blocked — review evidence:
+External transfer plan (if any; local and sensitive data excluded):
 State, change signals, and next-check rule:
 Observation / inference / hypothesis / fact boundary:
 Evolution, validation, canary, version, and rollback plan:

@@ -19,7 +19,7 @@ Sayelf Build Principles is a pre-development Skill for building **Agents, Skills
 | **05 — Intelligent Automation** | Automate discovery through recommendation while keeping `Observation`, `Inference`, `Hypothesis`, and `Fact` distinct. |
 | **06 — Evidence-driven Evolution** | Upgrade through `Observe → Challenge → Validate → Canary → Promote`, with versioning, traceability, and rollback. |
 | **07 — WebUI as Human Interface** | Build a WebUI only when the real function needs a human-facing visual interface; otherwise do not add one. When present, expose complexity progressively. |
-| **08 — Local Data & Sensitive Data Sovereignty** | Keep local and sensitive data inside the local trust boundary by default; never silently upload it or expose secrets. |
+| **08 — Local Data & Sensitive Data Sovereignty** | Keep local and sensitive data local. GitHub and public-network publication may contain only content explicitly classified `Public` and cleared by review. |
 | **Simple-first** | Choose the least complex reliable option that satisfies the real task. |
 
 When a WebUI is justified, the default user path is:
@@ -122,9 +122,11 @@ Keep the ordinary path to **Open → Input → Execute → Result**. Put evidenc
 
 Local data read from a device or workspace stays inside the local trust boundary by default. This includes local files, source code, documents, media, logs, databases, project context, and device-derived data. Do not upload or silently transmit it to cloud services, external models, web searches, third-party APIs, telemetry, remote logs, or automatic synchronization.
 
-Sensitive or restricted data includes credentials and secrets (passwords, API keys, tokens, private keys, cookies, and session credentials), personal data, customer data, proprietary material, financial, health, legal, biometric, location, unpublished, and security-sensitive information. Sensitive data must remain local by default; credentials and secrets must never be uploaded.
+Sensitive or restricted data includes credentials and secrets (passwords, API keys, tokens, private keys, cookies, and session credentials), personal data, customer data, proprietary material, financial, health, legal, biometric, location, unpublished, and security-sensitive information. Sensitive data must remain local; credentials and secrets must never be uploaded.
 
-An external transfer is allowed only when it is necessary for the real task and all of the following are satisfied: the user gives specific authorization, the destination and retention are understood, the minimum necessary data is selected, local redaction or tokenization is performed, the transfer uses an approved secure route, and the transfer and resulting output can be audited for leakage. If any condition is unknown, keep the data local and stop to clarify.
+For GitHub and any public network, local, internal, sensitive, restricted, or unknown data must not leave the local trust boundary. This prohibition covers commits, pushes, public or private repositories, pull requests, issues, releases, packages, public websites, screenshots, logs, traces, metadata, archives, telemetry, and quoted or pasted content. A request to push or publish is not permission to expose non-public data, and encoding, compression, screenshots, transformation, or indirection must not be used to bypass this rule.
+
+Only content explicitly classified **Public** may be published externally. Before a GitHub push or public release, review the staged diff and every release artifact for local, internal, sensitive, restricted, or unknown data. If classification, authorization, destination, retention, or leak-check evidence is missing, block the transfer and keep the data local. Other external transfers are allowed only when necessary, specifically authorized, minimized, locally redacted or tokenized, sent through an approved secure route, and auditable for leakage.
 
 Review prompts, outputs, errors, logs, traces, caches, and telemetry for accidental disclosure. Local-first therefore means both **local computation** and **local data control**.
 
