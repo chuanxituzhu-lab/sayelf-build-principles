@@ -1,11 +1,11 @@
 # sayelf-build-principles
 
-**A build-time Skill for Codex / AI Coding Agents.**
+**A portable build-time Skill for AI coding agents and agent platforms.**
 
 > **先证明值得造，再用最简单的方法把真正需要的东西造好。**  
 > Prove it is worth building. Then build only what matters.
 
-Sayelf Build Principles is a pre-development Skill for building **Agents, Skills, Tools, and Systems**. It keeps development from becoming duplicate, overbuilt, cloud-heavy, or difficult to use.
+Sayelf Build Principles is a pre-development Skill for building **Agents, Skills, Tools, and Systems**. It keeps development from becoming duplicate, overbuilt, cloud-heavy, or difficult to use. The core is platform-neutral and can be loaded by Claude Code, Tencent WorkBuddy / CodeBuddy, Codex, and other hosts that support Markdown-based Skills.
 
 ## Core Functions
 
@@ -26,6 +26,18 @@ The default user path is always:
 **Open → Input → Execute → Result**
 
 The system may be sophisticated behind the interface. A normal user should not need to understand the architecture, plugins, models, parameters, or logs to complete the core task.
+
+## Portable by design
+
+The portable unit is the folder containing this `SKILL.md`. Its frontmatter uses only the common `name` and `description` fields, and its body does not require a specific model, tool API, shell, hook, environment variable, or vendor command.
+
+Use the same folder through the host's supported Skill mechanism:
+
+- **Claude Code:** place it at `.claude/skills/sayelf-build-principles/` for a project Skill or `~/.claude/skills/sayelf-build-principles/` for a personal Skill.
+- **Tencent CodeBuddy Code:** place it at `.codebuddy/skills/sayelf-build-principles/` or `~/.codebuddy/skills/sayelf-build-principles/`.
+- **Tencent WorkBuddy and other hosts:** import or install the folder through the host's Skill management or marketplace surface.
+
+If a host requires a wrapper, add only the host-specific invocation or packaging metadata and keep this `SKILL.md` as the single source of truth. `AGENTS.md` is an optional concise adapter for hosts that read project-level `AGENTS.md`; it is not required for portability.
 
 ---
 
@@ -113,4 +125,4 @@ Complexity is allowed only when simpler options have been tested or ruled out by
 
 ## Use this Skill
 
-Read [SKILL.md](SKILL.md) before developing or materially changing an Agent, Skill, Tool, or System. [AGENTS.md](AGENTS.md) provides the concise project-level gate for Codex work.
+Read [SKILL.md](SKILL.md) before developing or materially changing an Agent, Skill, Tool, or System. [AGENTS.md](AGENTS.md) provides an optional concise project-level gate for hosts that support that convention.

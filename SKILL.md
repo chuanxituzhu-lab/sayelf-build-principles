@@ -1,13 +1,11 @@
 ---
 name: sayelf-build-principles
-description: Apply evidence-first, simple-first build gates when creating or materially changing a Codex or AI coding Agent, Skill, Tool, System, or its human-facing WebUI.
-metadata:
-  short-description: Build only what evidence justifies
+description: Apply evidence-first, simple-first build gates when creating or materially changing an AI coding Agent, Skill, Tool, System, or its human-facing WebUI.
 ---
 
 # Sayelf Build Principles
 
-Use this Skill before creating or materially changing an **Agent, Skill, Tool, System, or major feature**. It is a build-time decision and execution protocol, not a business framework or a prescribed technology stack.
+Use this Skill in any compatible AI coding agent or agent platform before creating or materially changing an **Agent, Skill, Tool, System, or major feature**. It is a build-time decision and execution protocol, not a business framework or a prescribed technology stack.
 
 ## Trigger conditions
 
@@ -19,6 +17,14 @@ Activate when the request involves any of the following:
 - a proposal to replace, rebuild, or expand an existing solution.
 
 For a small, local change with no new capability or design decision, apply the relevant principles proportionally and do not manufacture a large decision record.
+
+## Portability contract
+
+- Treat this file as the canonical source of truth. Do not duplicate or fork its principles into host-specific versions.
+- Depend only on the portable instruction surface: YAML frontmatter with `name` and `description`, plus Markdown instructions.
+- Do not assume a particular model, tool name, shell, hook, path convention, environment variable, plugin API, or slash command. Use host-specific capabilities only when the host provides them, and keep them optional.
+- If a host requires an adapter or manifest, translate only installation and invocation details; preserve the gates, decision classes, evidence boundaries, and user path unchanged.
+- `AGENTS.md` in this repository is an optional concise project adapter. It is not required to load or apply this Skill.
 
 ## Hard stop before coding
 

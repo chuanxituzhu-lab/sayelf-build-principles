@@ -1,6 +1,6 @@
 # AGENTS.md
 
-This repository defines the build-time rules in [SKILL.md](SKILL.md). Use that Skill before creating or materially changing an Agent, Skill, Tool, System, major feature, automation boundary, dependency, or WebUI workflow.
+This is an optional project-level adapter for hosts that read `AGENTS.md`. The portable source of truth is [SKILL.md](SKILL.md); load it through the host's supported Skill mechanism before creating or materially changing an Agent, Skill, Tool, System, major feature, automation boundary, dependency, or WebUI workflow.
 
 Project-level hard gates:
 
@@ -11,4 +11,4 @@ Project-level hard gates:
 5. Keep the ordinary user path **Open → Input → Execute → Result**. Put technical complexity behind progressive disclosure.
 6. Keep changes minimal and verify the stated success measure before declaring completion. Report residual risk and untested behavior.
 
-Do not expand this file with the full Skill. Update `SKILL.md` when the executable development protocol changes.
+Do not expand this file with the full Skill. Update `SKILL.md` when the executable development protocol changes; keep this file limited to host-level enforcement.
