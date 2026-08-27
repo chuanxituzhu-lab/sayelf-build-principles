@@ -19,6 +19,7 @@ Sayelf Build Principles is a pre-development Skill for building **Agents, Skills
 | **05 — Intelligent Automation** | Automate discovery through recommendation while keeping `Observation`, `Inference`, `Hypothesis`, and `Fact` distinct. |
 | **06 — Evidence-driven Evolution** | Upgrade through `Observe → Challenge → Validate → Canary → Promote`, with versioning, traceability, and rollback. |
 | **07 — WebUI as Human Interface** | Build a WebUI only when the real function needs a human-facing visual interface; otherwise do not add one. When present, expose complexity progressively. |
+| **08 — Local Data & Sensitive Data Sovereignty** | Keep local and sensitive data inside the local trust boundary by default; never silently upload it or expose secrets. |
 | **Simple-first** | Choose the least complex reliable option that satisfies the real task. |
 
 When a WebUI is justified, the default user path is:
@@ -79,6 +80,8 @@ Keep the Core independent from specific platforms. Platform, collector, analyzer
 
 Prefer local execution for deterministic rules, transcription, frame extraction, metrics, parsing, caching, indexing, deduplication, and state management. Use cloud services or large models when local capability is insufficient or the evidence justifies the cost.
 
+Local-first covers where computation happens. Data residency is a separate mandatory gate described in Principle 08.
+
 **Less Token · Less Cloud · Less Latency · Less Cost · More Control**
 
 ### 04 — Dynamic by State
@@ -114,6 +117,16 @@ When a WebUI is justified, it is the system's human execution interface. The vis
 **Input → Processing → Evidence → State → Decision → Action → Outcome**
 
 Keep the ordinary path to **Open → Input → Execute → Result**. Put evidence, plugins, models, parameters, logs, and developer controls behind progressive disclosure such as advanced settings or Developer Mode.
+
+### 08 — Local Data & Sensitive Data Sovereignty
+
+Local data read from a device or workspace stays inside the local trust boundary by default. This includes local files, source code, documents, media, logs, databases, project context, and device-derived data. Do not upload or silently transmit it to cloud services, external models, web searches, third-party APIs, telemetry, remote logs, or automatic synchronization.
+
+Sensitive or restricted data includes credentials and secrets (passwords, API keys, tokens, private keys, cookies, and session credentials), personal data, customer data, proprietary material, financial, health, legal, biometric, location, unpublished, and security-sensitive information. Sensitive data must remain local by default; credentials and secrets must never be uploaded.
+
+An external transfer is allowed only when it is necessary for the real task and all of the following are satisfied: the user gives specific authorization, the destination and retention are understood, the minimum necessary data is selected, local redaction or tokenization is performed, the transfer uses an approved secure route, and the transfer and resulting output can be audited for leakage. If any condition is unknown, keep the data local and stop to clarify.
+
+Review prompts, outputs, errors, logs, traces, caches, and telemetry for accidental disclosure. Local-first therefore means both **local computation** and **local data control**.
 
 ## Simple-first
 

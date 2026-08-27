@@ -13,6 +13,7 @@ Activate when the request involves any of the following:
 
 - a new Agent, Skill, Tool, System, product, or major capability;
 - a new architecture, dependency, integration, plugin boundary, automation loop, or model/cloud service;
+- a new data flow, external API/model, telemetry, synchronization, upload, or integration that could move local or sensitive data;
 - a new or materially changed WebUI workflow;
 - a proposal to replace, rebuild, or expand an existing solution.
 
@@ -50,7 +51,7 @@ Classify the proposal as exactly one of these:
 
 **Improve is the minimum self-development threshold.** “Better”, “more intelligent”, or “more complete” is not evidence. Name at least one measurable difference: local control, token use, latency, cost, dependency count, compatibility, reliability, evidence quality, automation boundary, or usability.
 
-## Seven principles
+## Eight principles
 
 ### 01 — Negative Entropy
 
@@ -68,7 +69,7 @@ Keep the Core platform-independent. Make platform, collector, analyzer, model, s
 
 ### 03 — Local-first
 
-Prefer local execution for deterministic rules, parsing, transcription, frame extraction, metrics, caching, indexing, deduplication, and state management. Add cloud or model dependencies only when local capability is insufficient or evidence justifies them.
+Prefer local execution for deterministic rules, parsing, transcription, frame extraction, metrics, caching, indexing, deduplication, and state management. Add cloud or model dependencies only when local capability is insufficient or evidence justifies them. This covers computation; Principle 08 independently governs data residency and egress.
 
 ### 04 — Dynamic by State
 
@@ -88,6 +89,16 @@ First decide whether the real function needs a human-facing visual interface. Bu
 
 When a WebUI is justified, treat it as the human execution interface, not decoration. Make the user-facing chain **Input → Processing → Evidence → State → Decision → Action → Outcome**, while preserving **Open → Input → Execute → Result** as the ordinary path. Progressively disclose evidence, plugins, models, parameters, logs, and developer controls.
 
+### 08 — Local Data & Sensitive Data Sovereignty
+
+Keep local data read from a device or workspace inside the local trust boundary by default. This includes local files, source code, documents, media, logs, databases, project context, and device-derived data. Do not upload or silently transmit it to cloud services, external models, web searches, third-party APIs, telemetry, remote logs, or automatic synchronization.
+
+Treat credentials and secrets (passwords, API keys, tokens, private keys, cookies, and session credentials), personal data, customer data, proprietary material, financial, health, legal, biometric, location, unpublished, and security-sensitive information as sensitive or restricted. Sensitive data stays local by default; credentials and secrets must never be uploaded.
+
+Allow an external transfer only when it is necessary for the real task and all of these conditions hold: specific user authorization, known destination and retention, minimum necessary data, local redaction or tokenization, an approved secure route, and an auditable transfer plus output leak check. If any condition is unknown, keep the data local and stop to clarify.
+
+Review prompts, outputs, errors, logs, traces, caches, and telemetry for accidental disclosure. Local-first therefore means both **local computation** and **local data control**.
+
 ## Simple-first constraint
 
 Choose the least complex reliable option that satisfies the real task, in this order:
@@ -104,11 +115,12 @@ Increase complexity only after simpler options are tested or ruled out with evid
 4. **Select:** choose the simplest reliable implementation and state what is deliberately not being built.
 5. **Bound:** define the minimum Core and isolate optional or platform-specific capabilities as plugins where needed.
 6. **Localize:** decide what runs locally and justify every cloud or model boundary.
-7. **Model state:** define state, change signals, importance, and next-check behavior instead of fixed polling.
-8. **Bound automation:** label observations, inferences, hypotheses, and facts; identify the validation evidence.
-9. **Choose the interface:** decide whether the real function justifies a WebUI. If yes, make it follow Open → Input → Execute → Result and hide advanced controls behind progressive disclosure; if no, do not add a WebUI and keep the simplest suitable interface.
-10. **Build the minimum slice:** implement only the smallest path that can produce the stated result.
-11. **Verify and evolve:** run focused checks, record evidence, and promote changes only through validation, canary, versioning, and rollback readiness.
+7. **Protect data:** classify local and sensitive data, define the local trust boundary and any possible egress, and apply the no-upload default. If transfer is necessary, record authorization, minimization, redaction, destination, retention, secure route, and leak checks.
+8. **Model state:** define state, change signals, importance, and next-check behavior instead of fixed polling.
+9. **Bound automation:** label observations, inferences, hypotheses, and facts; identify the validation evidence.
+10. **Choose the interface:** decide whether the real function justifies a WebUI. If yes, make it follow Open → Input → Execute → Result and hide advanced controls behind progressive disclosure; if no, do not add a WebUI and keep the simplest suitable interface.
+11. **Build the minimum slice:** implement only the smallest path that can produce the stated result.
+12. **Verify and evolve:** run focused checks, record evidence, inspect outputs for data leakage, and promote changes only through validation, canary, versioning, and rollback readiness.
 
 ## Required Output Before Coding
 
@@ -123,6 +135,8 @@ Success measure and required evidence:
 Minimum Core:
 Plugin boundaries (if any):
 Local-first boundary:
+Data classification and local trust boundary:
+External transfer, authorization, minimization, retention, and leak-check plan:
 State, change signals, and next-check rule:
 Observation / inference / hypothesis / fact boundary:
 Evolution, validation, canary, version, and rollback plan:
