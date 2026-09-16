@@ -13,7 +13,7 @@ Sayelf Build Principles is a pre-development Skill for building **Agents, Skills
 | --- | --- |
 | **Step 0 — Innovation Gate** | Search, compare, distill, find the gap, then decide: `Duplicate`, `Integrate`, `Improve`, `Differentiate`, or `Innovate`. **Improve is the minimum bar for new development.** |
 | **01 — Negative Entropy** | Keep only the necessary **objects, functions, and interactions**; remove architecture, functional, and interaction entropy. |
-| **02 — Modular / Pluggable** | Keep the Core platform-independent; replace, enable/disable, upgrade, or isolate platform-specific capabilities. |
+| **02 — Modular / Pluggable** | Keep the Core platform-independent; make platform capabilities and AI harness/runtime adapters replaceable through a minimal, permission-bounded contract. |
 | **03 — Local-first** | Prefer local rules, parsing, analysis, caching, indexing, deduplication, and state management before cloud or model calls. |
 | **04 — Dynamic by State** | Schedule work from state, change rate, and importance instead of fixed brute-force polling. |
 | **05 — Intelligent Automation** | Automate discovery through recommendation while keeping `Observation`, `Inference`, `Hypothesis`, and `Fact` distinct. |
@@ -75,6 +75,10 @@ Retain only what is necessary to complete the real task and close its evidence l
 ### 02 — Modular / Pluggable
 
 Keep the Core independent from specific platforms. Platform, collector, analyzer, model, storage, publisher, and similar capabilities should be replaceable, independently enabled or disabled, upgradeable, and isolated when appropriate.
+
+Treat the AI harness—the runner, agent loop, runtime, or orchestrator—as a replaceable adapter outside the Core. Its bidirectional contract should cover inputs and results, capabilities, tool calls, state and checkpoints, events, interruption and resumption, approvals, failures, usage, and inspectable evidence.
+
+Reuse available shared harness capabilities—such as tools, models, agents, sessions, sandboxes, caches, state stores, approvals, guardrails, schedulers, usage accounting, and tracing—before building duplicates. Discover them through stable names, versions, schemas, and limits; preserve provider/version provenance; isolate task state and credentials; request minimum scope; and define unavailable, denied, and degraded behavior. Availability never implies authorization. Harnesses may use or share only explicitly granted capabilities and must not silently expand tool access, telemetry, persistence, or data egress.
 
 ### 03 — Local-first
 

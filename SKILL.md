@@ -67,6 +67,12 @@ When a WebUI is present, the default user path is **Open → Input → Execute �
 
 Keep the Core platform-independent. Make platform, collector, analyzer, model, storage, publisher, and similar capabilities replaceable, independently enabled or disabled, upgradeable, and isolated where useful.
 
+Treat an **AI harness**—the runner, agent loop, runtime, or orchestrator that drives model turns and tool execution—as a replaceable adapter outside the Core. Define a minimal bidirectional contract for task input and result output, capability discovery, tool calls, state and checkpoints, events, pause/resume/cancel, human approval, errors and retries, usage, and locally inspectable evidence. The Core must not depend on a provider-specific loop, event schema, or hosted control plane.
+
+Reuse shared harness capabilities before implementing local duplicates. These may include registered tools, models, agents, sessions, sandboxes, caches, memory or state stores, approval services, policy and guardrail services, schedulers, usage accounting, and tracing. Discover and negotiate capabilities at runtime through stable names, versions, schemas, and declared limits; record which provider and version produced each result. Keep task state and credentials isolated, request only the minimum capability and scope needed, and provide an explicit unavailable/denied/degraded path so shared capability loss does not corrupt Core state. Capability availability is not authorization: every use remains subject to explicit permission, local-first placement, and data-sovereignty rules.
+
+Harness integration must fail closed: it may coordinate or share only explicitly granted capabilities and must not silently widen permissions, tool access, telemetry, persistence, or data egress. Apply Principle 03 to execution placement, Principle 05 to automated decisions, Principle 06 to harness changes, and Principle 08 to prompts, traces, checkpoints, shared state, and tool inputs/outputs.
+
 ### 03 — Local-first
 
 Prefer local execution for deterministic rules, parsing, transcription, frame extraction, metrics, caching, indexing, deduplication, and state management. Add cloud or model dependencies only when local capability is insufficient or evidence justifies them. This covers computation; Principle 08 independently governs data residency and egress.
